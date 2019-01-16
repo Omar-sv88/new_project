@@ -1,0 +1,17 @@
+<?php
+
+//require_once MODELS_PATH.'inputNameModel.php';
+
+class inputName{
+
+    public function __construct(){
+        
+    }
+
+    public function __destruct(){
+        
+    }
+
+
+
+}
