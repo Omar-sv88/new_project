@@ -104,4 +104,40 @@ class HELPER{
 
     }
 
+    /**
+     * Is Index.
+     *
+     * You can know if the page you are working is index
+     *
+     * @return string
+     */
+
+    public static function isIndex(){
+
+        $baseName = explode('.', basename($_SERVER['PHP_SELF']));
+        $baseName = $baseName[0];
+        return ($baseName === 'index') ? 1: 0;
+
+    }
+
+    /**
+     * Redirect.
+     *
+     * You can redirect to a url
+     *
+     * @param  $url = string
+     * @return void
+     */
+
+    public static function redirect($url = null) {
+
+        if ($url !== null) {
+
+            header('Location: '. $url);
+            exit;
+
+        }
+
+    }
+
 }

@@ -12,3 +12,6 @@ define('CSS_PATH', ASSETS_PATH.'css/');
 define('JS_PATH', ASSETS_PATH.'js/');
 define('IMG_PATH', ASSETS_PATH.'img/');
 define('PHP_PATH', ASSETS_PATH.'php/');
+
+define('CTOKEN_KEY', '');
+define('ENV', 'DEV'); // DEV => DEVELOPER | PROD => PRODUCTION

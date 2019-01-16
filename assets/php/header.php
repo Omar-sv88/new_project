@@ -1,4 +1,12 @@
-<?php require_once './app/config/config.php'; ?>
+<?php
+
+require_once './app/config/config.php';
+require_once CONFIG_PATH.'classes_autoloader.php';
+
+if (!SESSION::have() && !HELPER::isIndex()) { HELPER::redirect('index.php?case=nologin'); }
+
+?>
+
 
 <base href="<?php echo BASE_PATH; ?>">
 <meta charset="utf-8">
