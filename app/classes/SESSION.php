@@ -1,19 +1,55 @@
 <?php
 
 class SESSION {
-
-    /**
-     * Have.
+    
+     /**
+     * Is Session Started.
      *
      * You can know if session have start
      *
-     * @return number
+     * @return bool
+     */
+    
+    public static function is_session_started() {
+
+        $result = FALSE;
+        if ( php_sapi_name() !== 'cli' ) {
+
+            if ( version_compare(phpversion(), '5.4.0', '>=') ) {
+
+                $result =  (session_status() === PHP_SESSION_ACTIVE) ? TRUE : FALSE;
+
+            } else {
+
+                $result = (session_id() === '') ? FALSE : TRUE;
+
+            }
+
+            if (!$result) {
+
+                if (session_status() == PHP_SESSION_NONE) { session_start(); }
+                $result = self::haveData();
+
+            }
+
+        }
+
+        return $result;
+
+    }
+
+    /**
+     * Have Data.
+     *
+     * You can know if var session is empty
+     *
+     * @return bool
      */
 
-    public static function have(){
+    private static function haveData(){
 
-        session_start();
-        return (isset($_SESSION['user']) && !empty($_SESSION['user']) && is_array($_SESSION['user']) || ENV === 'DEV') ? 1: 0;
+        $result = (isset($_SESSION['user']) && !empty($_SESSION['user']) && is_array($_SESSION['user']) || ENV === 'DEV') ? TRUE: FALSE;
+        return $result;
 
     }
 
