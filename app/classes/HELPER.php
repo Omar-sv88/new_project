@@ -126,15 +126,76 @@ class HELPER{
      * You can redirect to a url
      *
      * @param  $url = string
+     * @param  $params = array
+     * @param  $firstSeparator = string
      * @return void
      */
 
-    public static function redirect($url = null) {
+    public static function redirect($url = null, $params = null, $firstSeparator = '?') {
 
         if ($url !== null) {
 
-            header('Location: '. $url);
+            $get = '';
+            if (is_array($params)) {
+
+                $num = 0;
+                foreach ($params as $name => $value) {
+
+                    $get .= ($num === 0) ? $firstSeparator.$name.'='.$value : '&'.$name.'='.$value;
+                    $num++;
+
+                }
+
+            }
+
+            $url = $url.$get;
+            if (!empty(headers_list())) {
+
+                echo '
+                <script>
+                    window.location.replace("'. $url .'");
+                </script>';
+
+            }else { header('Location: '. $url); }
             exit;
+
+        }
+
+    }
+    
+     /**
+     * Get User Ip.
+     *
+     * You can get user's ip
+     *
+     * @return string
+     */
+    
+    public static function getUserIp() {
+
+        if (isset($_SERVER["HTTP_CLIENT_IP"])){
+
+            return $_SERVER["HTTP_CLIENT_IP"];
+
+        }elseif (isset($_SERVER["HTTP_X_FORWARDED_FOR"])){
+
+            return $_SERVER["HTTP_X_FORWARDED_FOR"];
+
+        }elseif (isset($_SERVER["HTTP_X_FORWARDED"])){
+
+            return $_SERVER["HTTP_X_FORWARDED"];
+
+        }elseif (isset($_SERVER["HTTP_FORWARDED_FOR"])){
+
+            return $_SERVER["HTTP_FORWARDED_FOR"];
+
+        }elseif (isset($_SERVER["HTTP_FORWARDED"])){
+
+            return $_SERVER["HTTP_FORWARDED"];
+
+        }else{
+
+            return $_SERVER["REMOTE_ADDR"];
 
         }
 
