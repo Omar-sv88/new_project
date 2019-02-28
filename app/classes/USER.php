@@ -1,25 +1,8 @@
 <?php
 
-require_once MODELS_PATH.'user.php';
-
-class USER {
-
-    private $model, $user;
-
-    function __construct(){
-
-        $this->model = new userModel;
-
-    }
-
-    function __destruct(){
-
-        unset(
-            $this->model,
-            $this->user
-        );
-
-    }
+class USER extends CONTROLLER {
+    protected $model = 'user';
+    private $user;
 
     /**
      * Login.
