@@ -8,7 +8,7 @@ class CONTROLLER {
     {
         if ($this->model !== null)
         {
-            require_once MODEL_PATH.$this->model.'.php';
+            require_once MODELS_PATH.$this->model.'.php';
             $this->model = $this->model.'Model';
             $this->model = new $this->model;
         }
